@@ -13,7 +13,8 @@
         </div>
       </div>
       <div class="name">{{it.name}}</div>
-      <div class="price">￥ {{$toPrice(it.price)}}</div>
+      <div class="descript">{{it.descript}}</div>
+      <div class="price">￥ {{$toPrice(it.price)}}元</div>
     </div>
   </div>
 </template>
@@ -45,11 +46,12 @@ export default {
   width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
+  background: #fff;
   .my-shop-info-item {
     flex-grow: 0;
     flex-shrink: 0;
-    width: calc(~"25% - 12.5px");
-    margin: 10px 0 0px 10px;
+    width: calc(~"50% - 15px");
+    margin: 10px 0 10px 10px;
     .img-wrap {
       width: 100%;
       .img-container {
@@ -68,15 +70,21 @@ export default {
       }
     }
     .name {
-      margin-top: 4px;
-      line-height: 16px;
-      font-size: 14px;
-      margin-left: 2px;
+      margin-top: 8px;
+      line-height: 20px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+    .descript {
+      line-height: 20px;
+      font-size: 12px;
+      margin-left: 10px;
+      color: @gray;
     }
     .price {
-      margin-left: 2px;
-      line-height: 16px;
-      font-size: 12px;
+      margin-left: 10px;
+      line-height: 20px;
+      font-size: 14px;
       color: @red;
     }
   }

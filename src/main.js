@@ -8,7 +8,7 @@ import router from './router'
 import store from './store'
 import mixins from './mixins'
 import './style/style.less'
-import * as vux from 'vux'
+import registerVux from './registerVux'
 import './server'
 
 let deal = {
@@ -29,9 +29,7 @@ window.start((data) => {
   Vue.config.productionTip = false
   Vue.use(Components)
   Vue.mixin(mixins)
-  for (let key in vux) {
-    Vue.component(key, vux[key])
-  }
+  registerVux()
   window.attention = data.attention
   let vm = new Vue({
     router,

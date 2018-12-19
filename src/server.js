@@ -1,9 +1,11 @@
 import APIConnection from './APIConnection'
 // 配置项
-var wsUri = 'ws://47.104.245.204:51717/hfh2'
+var wsUri = 'ws://47.105.103.75:51717/jiabao'
+const httpUri = 'http://www.baodesc.com'
 var testUser = {
-  'ip': '192.168.135.57',
-  'openid': 'o30hO0XNsn-AUaGSAI8-6Sjiq4fU',
+  // 'ip': '192.168.135.57',
+  'ip': 'localhost',
+  'openid': 'wxc6fb62c4ea043404',
   'access_token': '13_QUhx7hedJV1pqvKBqcK6EuPh9rQeYzlBpBV7GPWtbkBuVPtIU3upvYnC3RJR4GsRaO2x3wCeSpjlAFVKnLllCg&state=aHR0cDovLzEyNy4wLjAuMTo4MDgwLyMvcGFnZS9zaGFyZQ=='
 }
 // END配置项
@@ -63,14 +65,15 @@ function startApiconn () {
 }
 
 function init (deal, startCall) {
-  var search = decodeURI(location.search)
+  var match = location.href.match(/\?([^#/]+)/)
+  var search = match ? match[1] : ''
+  // var search = decodeURI(location.search)
   var searchObj = {}
   if (search !== '') {
-    search.substr(1, search.length)
-      .split('&').forEach(function (data) {
-        var datas = data.split('=')
-        searchObj[datas[0]] = datas[1]
-      })
+    search.split('&').forEach(function (data) {
+      var datas = data.split('=')
+      searchObj[datas[0]] = datas[1]
+    })
   }
 
   if (deal) {
@@ -83,7 +86,7 @@ function init (deal, startCall) {
 
   if (!location.host.match(testUser.ip)) {
     if (!searchObj.openid) {
-      // location.href = httpUri + '/cgi-bin/get.pl?redirect=' + window.btoa(location.href.replace(/\?.+#/, '#'))
+      location.href = httpUri + '/cgi-bin/get.pl?redirect=' + window.btoa(location.href)
       return false
     }
   } else {
